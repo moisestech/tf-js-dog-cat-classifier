@@ -1,0 +1,25 @@
+{
+  "name": "tf-js-dog-cat-classifier",
+  "version": "1.0.0",
+  "description": "Dog Cat Classifer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moisestech/tf-js-dog-cat-classifier.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moisestech/tf-js-dog-cat-classifier/issues"
+  },
+  "homepage": "https://github.com/moisestech/tf-js-dog-cat-classifier#readme",
+  "devDependencies": {
+    "webpack": "^5.19.0",
+    "webpack-cli": "^4.4.0"
+  },
+  "dependencies": {}
+}
