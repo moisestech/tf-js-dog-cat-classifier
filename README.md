@@ -1,6 +1,18 @@
 # Tensorflow.js React Dog Cat Classifier
 
-Tensorflow.js React Dog Cat Classifer
+## **Dog Cat Image Detector**
+
+## ⚙ Features
+
+## 👁️‍🗨️ Project Preview
+
+Coming Soon!
+
+## 🗺 URL Tree
+
+## 🌿 App tree
+
+## ⛰️ Roadmap
 
 ## To-Do's
 
