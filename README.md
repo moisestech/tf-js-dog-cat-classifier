@@ -8,6 +8,10 @@
 
 Coming Soon!
 
+## 🚀 Start
+
+bash `npx webpack-dev-server`
+
 ## 🗺 URL Tree
 
 ## 🌿 App tree
