@@ -26,7 +26,9 @@ module.exports = {
             presets:['@babel/preset-env'],
             plugins: [
               '@babel/plugin-transform-runtime',
-              ['@babel/plugin-proposal-pipeline-oprator', {proposal:'minimal'}]
+              ['@babel/plugin-proposal-pipeline-operator', {proposal:'minimal'}],
+              "@babel/plugin-syntax-dynamic-import"
+
             ]
           }
         }
