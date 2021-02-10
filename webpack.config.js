@@ -1,5 +1,6 @@
 const path = require('path');
-const cleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const copyPlugin = require('copy-webpack-plugin');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
@@ -15,7 +16,7 @@ module.exports = {
     port: 3030,
     hot: true
   },
-  modules: {
+  module: {
     rules: [
       {
         test:/\.js$/,
@@ -61,10 +62,9 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new cleanWebpackPlugin(['./dist']),
+    new CleanWebpackPlugin(),
     new htmlWebpackPlugin({
       filename: 'index.html',
-      template: './template.html',
       favicon: './favicon.ico'
     })
   ]
