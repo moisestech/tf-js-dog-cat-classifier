@@ -1,7 +1,7 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const copyPlugin = require('copy-webpack-plugin');
-const htmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
@@ -10,11 +10,12 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
-  mode: 'development',
+  mode: process.env.NODE_ENV === "production" ? "production" : "development",
   devServer: {
     contentBase:'./dist',
     port: 3030,
-    hot: true
+    hot: true,
+    historyApiFallback: true
   },
   module: {
     rules: [
@@ -29,7 +30,6 @@ module.exports = {
               '@babel/plugin-transform-runtime',
               ['@babel/plugin-proposal-pipeline-operator', {proposal:'minimal'}],
               "@babel/plugin-syntax-dynamic-import"
-
             ]
           }
         }
@@ -63,9 +63,13 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new CleanWebpackPlugin(),
-    new htmlWebpackPlugin({
+    new HtmlWebpackPlugin({
       filename: 'index.html',
-      favicon: './favicon.ico'
+      template: "./public/index.html",
+      favicon: './public/favicon.ico'
+    }),
+    new CopyPlugin({
+      patterns: [{ from: "./public/_redirects" }],
     })
   ]
 }
