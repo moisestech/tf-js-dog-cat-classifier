@@ -4,19 +4,52 @@
 
 ## ⚙ Features
 
+- React 17
+- React Hooks
+- Tensorflow @2.8.5
+- ES8
+- PropTypes
+
 ## 👁️‍🗨️ Project Preview
 
 Coming Soon!
 
 ## 🚀 Start
 
-bash `npx webpack-dev-server`
+To start app: `npm start`
+Fore additional info: []()
 
 ## 🗺 URL Tree
 
+```bash
+├── /                          #Home
+```
+
 ## 🌿 App tree
 
+```bash
+├── HOWTO.md
+├── LICENSE
+├── README.md
+├── package.json
+├── public
+│   ├── _redirects
+│   ├── assets
+│   ├── favicon.ico
+│   └── index.html
+├── src
+│   ├── App
+│   │   └── index.js
+│   ├── index.js
+│   └── styles.css
+└── webpack.config.js
+```
+
 ## ⛰️ Roadmap
+
+1. Migrate to TypeScript
+2. Make Mobile Friendly
+3. Write Tests
 
 ## To-Do's
 
@@ -26,7 +59,3 @@ bash `npx webpack-dev-server`
 4. Add HOWTO.md page
 5. Add File Diagram
 6. Add Babel Compilation
-7. Migrate to TypeScript
-8. Make Mobile Friendly
-9. Write Tests
-
