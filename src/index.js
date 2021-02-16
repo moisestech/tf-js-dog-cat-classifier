@@ -1,7 +1,11 @@
-import "./styles.css";
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './styles.css';
+import App from './App';
 
-let project_name = "Tensorflow.js React Dog Cat Classifier";
-
-console.log(project_name);
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
