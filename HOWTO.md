@@ -2,19 +2,9 @@
 
 ## **1.** Install dependencies
 
-## **2.** Import dependencies
+## **2.** Layout the state machine
 
-## **3.** Setup webcam and canvas
-
-## **4.** Define references to those
-
-## **5.** Load handpose
-
-## **6.** Detect function
-
-## **7.** Drawing utilities
-
-## **8.** Draw functions
+## **3.** Add Functionality
 
 ---
 
