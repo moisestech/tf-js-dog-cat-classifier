@@ -7,6 +7,7 @@
 - React 17
 - React Hooks
 - Tensorflow @2.8.5
+- [MobileNet Model](https://github.com/tensorflow/tfjs-models/tree/master/mobilenet)
 - ES8
 - PropTypes
 
