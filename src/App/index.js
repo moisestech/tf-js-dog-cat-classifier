@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import mobilenet from '@tensorflow-models/mobilenet';
+
 export default function App() {
   let project_name = "Tensorflow.js React Dog Cat Classifier";
 
