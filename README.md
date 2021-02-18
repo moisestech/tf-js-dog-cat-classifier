@@ -4,12 +4,14 @@
 
 ## ⚙ Features
 
-- React 17
-- React Hooks
-- Tensorflow @2.8.5
+- [React 17](https://reactjs.org/blog/2020/10/20/react-v17.html)
+- [React Hooks](https://reactjs.org/docs/hooks-intro.html)
+- [React Webcam](https://www.npmjs.com/package/react-webcam)
+- [Canvas API](https://www.w3schools.com/tags/canvas_arc.asp)
+- [Tensorflow @2.8.5](https://www.tensorflow.org/js/models)
 - [MobileNet Model](https://github.com/tensorflow/tfjs-models/tree/master/mobilenet)
-- ES8
-- PropTypes
+- [ES8](https://www.w3schools.com/js/js_2018.asp)
+- [PropTypes](https://www.npmjs.com/package/prop-types)
 
 ## 👁️‍🗨️ Project Preview
 
@@ -18,7 +20,10 @@ Coming Soon!
 ## 🚀 Start
 
 To start app: `npm start`
-Fore additional info: []()
+
+## 📚 HOW-TO
+
+For additional info click [here]()
 
 ## 🗺 URL Tree
 
