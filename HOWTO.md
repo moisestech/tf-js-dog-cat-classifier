@@ -49,6 +49,17 @@
 
 ### Babel Loader
 
+### Babel Presets
+
+- **@babel/preset-env**: info coming soon.
+- **@babel/preset-react**: info coming soon.
+
+### Babel Plugins
+
+- **@babel/plugin-transform-runtime**: info coming soon.
+- **@babel/plugin-proposal-pipeline-operator**: info coming soon.
+- **@babel/plugin-syntax-dynamic-import**: info coming soon.
+
 ---
 
 ## TREE
