@@ -2,11 +2,10 @@ import React, { useState } from "react";
 
 import mobilenet from '@tensorflow-models/mobilenet';
 
-export default function App() {
-  let project_name = "Tensorflow.js React Dog Cat Classifier";
+export default function App({project_name = "Tensorflow.js React Dog Cat Classifier"}) {
 
   return (  
-    {project_name}
+    <h1>{project_name}</h1>
   )
 }
 
