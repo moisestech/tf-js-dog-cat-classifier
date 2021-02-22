@@ -62,6 +62,7 @@ For additional info click [here]()
 1. Finnish Webpack Config
 2. Finnish Tutorial
 3. Finnish README.md page
-4. Add HOWTO.md page
-5. Add File Diagram
-6. Add Babel Compilation
+4. Init Redux lib
+5. Finnish HOWTO.md page
+6. Add File Diagram
+7. Add Babel Compilation
