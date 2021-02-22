@@ -23,6 +23,16 @@ const reducer = (currentState, event) =>
   stateMachine.states[currrentState].on[event] || stateMachine.initial;
 ```
 
+## **5.** Dispatch "next" event on **appState**
+
+- App/index.js **component body**
+
+```javascript
+const [appState, dispatch] = useReducer(reducer, stateMachine.initial);
+```
+
+- **appState** will be a string representing the current app state, and dispatch is a function that sends an event into our reducer, in order to trigger a transition and return a new state.
+
 ## **3.** Add Functionality
 
 ---
