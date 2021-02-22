@@ -3,7 +3,8 @@ import React, { useState, useReducer } from "react";
 import mobilenet from '@tensorflow-models/mobilenet';
 
 export default function App({project_name = "Tensorflow.js React Dog Cat Classifier"}) {
-
+  const [appState, dispatch] = useReducer(reducer, stateMachine.initial);
+  
   return (  
     <h1>{project_name}</h1>
   )
