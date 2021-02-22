@@ -4,6 +4,13 @@
 
 ## **2.** Layout the state machine
 
+- **States:**
+  - 6 stages that our app can be in, each of which can have specific characteristics: (e.g. showing and image). Our app, at any given moment, can only occupy one state.
+
+- **Transitions:**
+  - Events that can trigger our app to move from one state to another. Thankfully, our simple app only needs one event, `next`.
+  - Each state’s `on.next` value is the name of the state that the app will transition to whenever the `next` event is fired while the app is in that state.
+
 ## **3.** Add Functionality
 
 ---
