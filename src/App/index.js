@@ -20,12 +20,12 @@ const stateMachine = {
 const reducer = (currentState, event) => stateMachine.states[currentState].on[event] || stateMachine.initial;
 
 export default function App({project_name = "Tensorflow.js React Dog Cat Classifier"}) {
-  const [state, dispatch] = useReducer(reducer, stateMachine.initial);
+  const [appState, dispatch] = useReducer(reducer, stateMachine.initial);
   
   return (
     <header>
       <button onClick={() => dispatch('next')}>
-        {state}
+        {appState}
       </button>
     </header>  
   )
