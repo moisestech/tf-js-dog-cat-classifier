@@ -21,11 +21,49 @@
   ```
 
 - **Transitions:**
-  - Events that can trigger our app to move from one state to another. Our simple app only needs one event, `next`.
+  - Events that can trigger our app to move from one state to another. Our simple app only needs one type of event, `next`.
   - Each state’s `on.next` value is the name of the state that the app will transition to whenever the `next` event is fired while the app is in that state.
   - Every time an event is fired, it will go through the reducer, causing a new state to be returned based on the rules determined by the mapping.
 
-## **3.** Init Redux
+```javascript
+const stateMachine = {
+    states: {
+      initial: { on: { next: "loadingModel"},
+      loadingModel: { on: { next: "modelReady" },
+      modelReady: { on: { next: "imageReady" },
+      imageReady: { on: { next: "identifying" },
+      identifying: { on: { next: "complete" },
+      complete: { on: { next: "modelReady" }
+    }
+  }
+};
+```
+
+## **3.** Init useReducer Hook
+
+- Next write a **React.useReducer** Hook that will wire the states of our App together.
+- This reducer will take the current state, and it will take the event and return the current state based on what the event was.
+
+```javascript
+const reducer = (currentState, event) => stateMachine.states[currentState].on[event] || stateMachine.initial;
+```
+
+- Refactor statemachine to include **initial** and **states** objects.
+
+```javascript
+const stateMachine = {
+    initial: 'initial',
+    states: {
+      initial: { on: { next: 'loadingModel'},
+      loadingModel: { on: { next: 'modelReady' },
+      modelReady: { on: { next: 'imageReady' },
+      imageReady: { on: { next: 'identifying' },
+      identifying: { on: { next: 'complete' },
+      complete: { on: { next: 'modelReady' }
+    }
+  }
+};
+```
 
 ## **4.** Return a new state machine on event
 
