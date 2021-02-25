@@ -7,12 +7,12 @@ import mobilenet from '@tensorflow-models/mobilenet';
 const stateMachine = {
     initial: "initial",
     states: {
-    initial: { on: { next: "loadingModel", text: "Load Model" } },
-    loadingModel: { on: { next: "modelReady", text: "Loading Model" } },
-    modelReady: { on: { next: "imageReady", text: "Upload Image"} },
-    imageReady: { on: { next: "identifying" }, text: "Identify Breed", showImage: true },
-    identifying: { on: { next: "complete", text: "Identifying…"} },
-    complete: { on: { next: "modelReady" }, text: "Reset", showImage: true, showResults: true }
+      initial: { on: { next: "loadingModel", text: "Load Model" } },
+      loadingModel: { on: { next: "modelReady", text: "Loading Model" } },
+      modelReady: { on: { next: "imageReady", text: "Upload Image"} },
+      imageReady: { on: { next: "identifying" }, text: "Identify Breed", showImage: true },
+      identifying: { on: { next: "complete", text: "Identifying…"} },
+      complete: { on: { next: "modelReady" }, text: "Reset", showImage: true, showResults: true }
   }
 };
 
@@ -20,10 +20,14 @@ const stateMachine = {
 const reducer = (currentState, event) => stateMachine.states[currentState].on[event] || stateMachine.initial;
 
 export default function App({project_name = "Tensorflow.js React Dog Cat Classifier"}) {
-  const [appState, dispatch] = useReducer(reducer, stateMachine.initial);
+  const [state, dispatch] = useReducer(reducer, stateMachine.initial);
   
-  return (  
-    <h1>{project_name}</h1>
+  return (
+    <header>
+      <button onClick={() => dispatch('next')}>
+        {state}
+      </button>
+    </header>  
   )
 }
 
