@@ -3,7 +3,7 @@ import React, { useState, useReducer } from "react";
 // model to detect inputted camera images
 import mobilenet from '@tensorflow-models/mobilenet';
 
-// manage the state of the app
+// mapping that manages the state of the app
 const stateMachine = {
     initial: "initial",
     states: {
@@ -16,6 +16,8 @@ const stateMachine = {
   }
 };
 
+// function triggering the stateMachine from useReducer
+const reducer = (currentState, event) => stateMachine.states[currentState].on[event] || stateMachine.initial;
 
 export default function App({project_name = "Tensorflow.js React Dog Cat Classifier"}) {
   const [appState, dispatch] = useReducer(reducer, stateMachine.initial);
