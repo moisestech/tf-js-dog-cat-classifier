@@ -68,13 +68,17 @@ const stateMachine = {
 };
 ```
 
-## **4.** Return a new state machine on event
+## **4.** Connect useReducer to App component
 
 - App/index.js
+- **`useReducer`** returns a touple, the initial state and a dispatch parameter.
+- The **`useReducer`** functions takes in our **`reducer`** function and our intial state **`stateMachine.initial`**
+- **`state`** is going to be a string representing, what state the app is in.
+- **`dispatch`** is a function that is going to fire an event, into the **`reducer`** which is going to fire a new state.
 
 ```javascript
-const reducer = (currentState, event) =>
-  stateMachine.states[currrentState].on[event] || stateMachine.initial;
+// in App() body
+const [state, dispatch] = useReducer(reducer, stateMachine.initial)
 ```
 
 ## **5.** Dispatch "next" event on **appState**
