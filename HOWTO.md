@@ -26,6 +26,7 @@
   - Every time an event is fired, it will go through the reducer, causing a new state to be returned based on the rules determined by the mapping.
 
 ```javascript
+// after imports
 const stateMachine = {
     states: {
       initial: { on: { next: "loadingModel"},
@@ -45,12 +46,14 @@ const stateMachine = {
 - This reducer will take the current state, and it will take the event and return the current state based on what the event was.
 
 ```javascript
+// before App() component
 const reducer = (currentState, event) => stateMachine.states[currentState].on[event] || stateMachine.initial;
 ```
 
 - Refactor statemachine to include **initial** and **states** objects.
 
 ```javascript
+// after imports
 const stateMachine = {
     initial: 'initial',
     states: {
