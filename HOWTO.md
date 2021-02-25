@@ -24,6 +24,7 @@
   - Events that can trigger our app to move from one state to another. Our simple app only needs one type of event, `next`.
   - Each state’s `on.next` value is the name of the state that the app will transition to whenever the `next` event is fired while the app is in that state.
   - Every time an event is fired, it will go through the reducer, causing a new state to be returned based on the rules determined by the mapping.
+  - Having a stateMachine will allow the app to deligate the state of the app to this object instead of having boolean logic inside of the app.
 
 ```javascript
 // after imports
@@ -86,12 +87,13 @@ const [state, dispatch] = useReducer(reducer, stateMachine.initial);
 - App/index.js **component body**
 
 ```javascript
+// in App() body
 const [appState, dispatch] = useReducer(reducer, stateMachine.initial);
 ```
 
-- **appState** will be a string representing the current app state, and dispatch is a function that sends an event into our reducer, in order to trigger a transition and return a new state.
+- **`appState`** will be a string representing the current app state, and **`dispatch`** is a function that sends an event into our reducer, in order to trigger a transition and return a new state.
 
-## **3.** Add Functionality
+## **6.** Add Functionality
 
 ---
 
