@@ -93,7 +93,16 @@ const [appState, dispatch] = useReducer(reducer, stateMachine.initial);
 
 - **`appState`** will be a string representing the current app state, and **`dispatch`** is a function that sends an event into our reducer, in order to trigger a transition and return a new state.
 
-## **6.** Add Functionality
+## **6.** Create re-usable Dispatch Function
+
+- The named arrow function const **`next`** will hold the **`dispatch`** function since this function will be called multiple times.
+
+```javascript
+// in App() after useReducer initialization
+const next = () => dispatch('next');
+```
+
+## **7.** Add Functionality
 
 ---
 
