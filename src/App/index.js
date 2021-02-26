@@ -25,7 +25,7 @@ export default function App({project_name = "Tensorflow.js React Dog Cat Classif
   
   return (
     <header>
-      <button onClick={() => dispatch('next')}>
+      <button onClick={next}>
         {appState}
       </button>
     </header>  
