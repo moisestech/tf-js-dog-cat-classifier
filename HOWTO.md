@@ -98,8 +98,31 @@ const [appState, dispatch] = useReducer(reducer, stateMachine.initial);
 - The named arrow function const **`next`** will hold the **`dispatch`** function since this function will be called multiple times.
 
 ```javascript
-// in App() after useReducer initialization
+// in App() after useReducer declaration
 const next = () => dispatch('next');
+```
+
+## **7.** Create Button with StateMachine Logic
+
+- A **`<button />`** element will take in **`buttonProps = {}`**.
+- **`buttonProps`** object will specify what the **`<button />`** will show at any given state and what the it has to do at any given state.
+
+```javascript
+// after next arrow function declaration
+const buttonProps = {
+  initial: {},
+  loadingModel: {},
+  awaitingModel: {},
+  ready: {},
+  classifying: {},
+  complete: {}
+};
+
+return (
+  <div>
+    <button onClick=()>{appState}</button>
+  </div>
+)
 ```
 
 ## **7.** Add Functionality
