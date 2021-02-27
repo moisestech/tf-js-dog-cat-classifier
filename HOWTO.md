@@ -141,10 +141,11 @@ return (
 </button>
 ```
 
-## **9.** Load and Store Model
+## **9.** Load, Store Model, and update StateMachine
 
 - **`loadModel`** async function will load the model as per the [MobileNet Tensorflow.js docs](https://www.npmjs.com/package/@tensorflow-models/mobilenet).
 - **`loadModel`** stores the loaded model in **`mobilenetModel`** and sets it to component useState Hook.
+- **`next();`** is invoked **before** await **`mobilenet.load();`** to update the state machine and **after** **`setModel(mobilenetModel);`**
 
 ```javascript
 // above buttonProps
