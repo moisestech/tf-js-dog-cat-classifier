@@ -11,7 +11,7 @@ import * mobilenet from '@tensorflow-models/mobilenet';
 
 - App/index.js
 - **States:**
-  - 6 stages that our app can be in, each of which can have specific characteristics: (e.g. showing and image). Our app, at any given moment, can only occupy one state.
+  i. 6 stages that our app can be in, each of which can have specific characteristics: (e.g. showing and image). Our app, at any given moment, can only occupy one state.
 
   ```javascript
   // after our library imports
@@ -26,9 +26,12 @@ import * mobilenet from '@tensorflow-models/mobilenet';
   ```
 
 - **Transitions:**
-  - Events that can trigger our app to move from one state to another. Our simple app only needs one type of event, `next`.
+  i. Events that can trigger our app to move from one state to another. Our simple app only needs one type of event, `next`.
+
   - Each state’s `on.next` value is the name of the state that the app will transition to whenever the `next` event is fired while the app is in that state.
+
   - Every time an event is fired, it will go through the reducer, causing a new state to be returned based on the rules determined by the mapping.
+
   - Having a stateMachine will allow the app to deligate the state of the app to this object instead of having boolean logic inside of the app.
 
 ```javascript
@@ -48,139 +51,146 @@ const stateMachine = {
 
 ## **3.** Init useReducer Hook
 
-- Next write a **React.useReducer** Hook that will wire the states of our App together.
-- This reducer will take the current state, and it will take the event and return the current state based on what the event was.
+  i. Next write a **React.useReducer** Hook that will wire the states of our App together.
 
-```javascript
-// before App() component
-const reducer = (currentState, event) => stateMachine.states[currentState].on[event] || stateMachine.initial;
-```
+  ii. This reducer will take the current state, and it will take the event and return the current state based on what the event was.
 
-- Refactor statemachine to include **initial** and **states** objects.
+  ```javascript
+  // before App() component
+  const reducer = (currentState, event) => stateMachine.states[currentState].on[event] || stateMachine.initial;
+  ```
 
-```javascript
-// after imports
-const stateMachine = {
-    initial: 'initial',
-    states: {
-      initial: { on: { next: 'loadingModel'},
-      loadingModel: { on: { next: 'modelReady' },
-      modelReady: { on: { next: 'imageReady' },
-      imageReady: { on: { next: 'identifying' },
-      identifying: { on: { next: 'complete' },
-      complete: { on: { next: 'modelReady' }
+  iii. Refactor statemachine to include **initial** and **states** objects.
+
+  ```javascript
+  // after imports
+  const stateMachine = {
+      initial: 'initial',
+      states: {
+        initial: { on: { next: 'loadingModel'},
+        loadingModel: { on: { next: 'modelReady' },
+        modelReady: { on: { next: 'imageReady' },
+        imageReady: { on: { next: 'identifying' },
+        identifying: { on: { next: 'complete' },
+        complete: { on: { next: 'modelReady' }
+      }
     }
-  }
-};
-```
+  };
+  ```
 
 ## **4.** Connect useReducer to App component
 
 - App/index.js
-- **`useReducer`** returns a touple, the initial state and a dispatch parameter.
-- The **`useReducer`** functions takes in our **`reducer`** function and our intial state **`stateMachine.initial`**
-- **`state`** is going to be a string representing, what state the app is in.
-- **`dispatch`** is a function that is going to fire an event, into the **`reducer`** which is going to fire a new state.
+  i.  **`useReducer`** returns a touple, the initial state and a dispatch parameter.
 
-```javascript
-// in App() body
-const [state, dispatch] = useReducer(reducer, stateMachine.initial);
-```
+  ii. The **`useReducer`** functions takes in our **`reducer`** function and our intial state **`stateMachine.initial`**
+
+  iii. **`state`** is going to be a string representing, what state the app is in.
+
+  iv. **`dispatch`** is a function that is going to fire an event, into the **`reducer`** which is going to fire a new state.
+
+  ```javascript
+  // in App() body
+  const [state, dispatch] = useReducer(reducer, stateMachine.initial);
+  ```
 
 ## **5.** Dispatch "next" event on **appState**
 
-- App/index.js **component body**
+  i. App/index.js **component body**
 
-```javascript
-// in App() body
-const [appState, dispatch] = useReducer(reducer, stateMachine.initial);
-```
+  ```javascript
+  // in App() body
+  const [appState, dispatch] = useReducer(reducer, stateMachine.initial);
+  ```
 
-- **`appState`** will be a string representing the current app state, and **`dispatch`** is a function that sends an event into our reducer, in order to trigger a transition and return a new state.
+  ii. **`appState`** will be a string representing the current app state, and **`dispatch`** is a function that sends an event into our reducer, in order to trigger a transition and return a new state.
 
 ## **6.** Create re-usable Dispatch Function
 
-- The named arrow function const **`next`** will hold the **`dispatch`** function since this function will be called multiple times.
+  i. The named arrow function const **`next`** will hold the **`dispatch`** function since this function will be called multiple times.
 
-```javascript
-// in App() after useReducer declaration
-const next = () => dispatch('next');
-```
+  ```javascript
+  // in App() after useReducer declaration
+  const next = () => dispatch('next');
+  ```
 
 ## **7.** Create Button with StateMachine Logic
 
-- A **`<button />`** element will take in **`buttonProps = {}`**.
-- **`buttonProps`** object will specify what the **`<button />`** will show at any given state and what the it has to do at any given state.
+  i. A **`<button />`** element will take in **`buttonProps = {}`**.
 
-```javascript
-// after next arrow function declaration
-const buttonProps = {
-  initial: { text: 'Load Model', action: () => {}},
-  loadingModel: { text: 'Loading Model...', action: () => {}},
-  awaitingModel: { text: '', action: () => {}},
-  ready: { text: 'Identify', action: () => {}},
-  classifying: { text: 'Identifying', action: () => {}},
-  complete: { text: 'Reset', action: () => {}}
-};
+  ii. **`buttonProps`** object will specify what the **`<button />`** will show at any given state and what the it has to do at any given state.
 
-return (
-  <div>
-    <button onClick=()>{appState}</button>
-  </div>
-)
-```
+  ```javascript
+  // after next arrow function declaration
+  const buttonProps = {
+    initial: { text: 'Load Model', action: () => {}},
+    loadingModel: { text: 'Loading Model...', action: () => {}},
+    awaitingModel: { text: '', action: () => {}},
+    ready: { text: 'Identify', action: () => {}},
+    classifying: { text: 'Identifying', action: () => {}},
+    complete: { text: 'Reset', action: () => {}}
+  };
+
+  return (
+    <div>
+      <button onClick=()>{appState}</button>
+    </div>
+  )
+  ```
 
 ## **8.** Connect Button to useReducer and State
 
-- **`buttonProps[appState]`** determines the functionality and text displayed.
+  i. **`buttonProps[appState]`** determines the functionality and text displayed.
 
-```javascript
-// App() return
-<button onClick={buttonProps[appState].action}>
-  {buttonProps[appState].text}
-</button>
-```
+  ```javascript
+  // App() return
+  <button onClick={buttonProps[appState].action}>
+    {buttonProps[appState].text}
+  </button>
+  ```
 
 ## **9.** Load, Store Model, and update StateMachine
 
-- **`loadModel`** async function will load the model as per the [MobileNet Tensorflow.js docs](https://www.npmjs.com/package/@tensorflow-models/mobilenet).
-- **`loadModel`** stores the loaded model in **`mobilenetModel`** and sets it to component useState Hook.
-- **`next();`** is invoked **before** await **`mobilenet.load();`** to update the state machine and **after** **`setModel(mobilenetModel);`**
+  i. **`loadModel`** async function will load the model as per the [MobileNet Tensorflow.js docs](https://www.npmjs.com/package/@tensorflow-models/mobilenet).
 
-```javascript
-// above buttonProps
-const loadModel = async () => {
-  next(); // loadingModel
-  const mobilenetModel = await mobilenet.load();
-  setModel(mobilenetModel);
-  next(); // modelReady
-}
-```
+  ii. **`loadModel`** stores the loaded model in **`mobilenetModel`** and sets it to component useState Hook.
+  
+  iii. **`next();`** is invoked **before** await **`mobilenet.load();`** to update the state machine and **after** **`setModel(mobilenetModel);`**
 
-- **React.useState** will contain the model to access and set state on.
-
-```javascript
-// below userReducer initialization
-const [model, setModel] = useState(null);
-```
-
-- **`buttonProps[initial].action`** is updated to store the async **`loadModel`** returned value.
-
-```javascript
-// after loadModel async function
-  const buttonProps = {
-    initial: { text: 'Load Model', action: loadModel },
-    //...
+  ```javascript
+  // above buttonProps
+  const loadModel = async () => {
+    next(); // loadingModel
+    const mobilenetModel = await mobilenet.load();
+    setModel(mobilenetModel);
+    next(); // modelReady
   }
-```
+  ```
+
+  iv. **React.useState** will contain the model to access and set state on.
+
+  ```javascript
+  // below userReducer initialization
+  const [model, setModel] = useState(null);
+  ```
+
+  v. **`buttonProps[initial].action`** is updated to store the async **`loadModel`** returned value.
+
+  ```javascript
+  // after loadModel async function
+    const buttonProps = {
+      initial: { text: 'Load Model', action: loadModel },
+      //...
+    }
+  ```
 
 ## **10.** Trigger the Upload of the Image
 
   i. **React.useRef** is initialized and used to access the new **`<input />`** component.
 
-```javascript
-const inputRef = useRef();
-```
+  ```javascript
+  const inputRef = useRef();
+  ```
 
   ii. The **`<input/>`** file-upload component will be triggered via javascript and access the users camera on mobile.
 
@@ -221,33 +231,35 @@ const inputRef = useRef();
 
 ## **12.** Init and Set useRef on Image
 
-- Initialize **React.useRef** to **`<img src={imageURL}`** to trigger model inference.
+  i. Initialize **React.useRef** to **`<img src={imageURL}`** to trigger model inference.
 
-```javascript
-// after inputRef
-const imageRef = useRef();
+  ```javascript
+  // after inputRef
+  const imageRef = useRef();
 
-// App() return (
-<img alt="upload-preview" src={imageURL} ref={useRef} />
-// )
-```
+  // App() return (
+  <img alt="upload-preview" src={imageURL} ref={useRef} />
+  // )
+  ```
 
 ## **13.** Sync stateMachine to Image component
 
-  i. Pull and store **`stateMachine.states.[appState]`** boolean **`showImage`** and set it's default state as **`false`**.
-
-  ii. In App component **`return()`**  create a **ternary** that shows or hides the image if its uploaded or not.
+  i. Store **`stateMachine.states.[appState]`** boolean **`showImage`** as a **`false`** default state.
 
   ```javascript
   // after buttonProps
   const { showImage = false } = stateMachine.states[appState];
+  ```
 
+  ii. In App component **`return()`**  create a **ternary** that shows or hides the image if its uploaded or not.
+
+  ```javascript
   // in App() return (
   {showImage && <img alt="upload-preview" src={imageURL} ref={useRef}/>}
   // )
   ```
 
-  iii. **buttonProps["awaitingUpload"].actions** object stores the **`inputRef.current.click()`**
+  iii. **`buttonProps["awaitingUpload"].action`** object stores the **`inputRef.current.click()`**
 
   ```javascript
   // after handleUpload initiation
