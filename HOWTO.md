@@ -213,7 +213,24 @@ const handleUpload = e => {
 };
 ```
 
-## **11.** Add Functionality
+## **11.** Set Image URL
+
+- **`<img url={imageURL} />`** tag will display the binary image file store in **`useState`** **`setImageURL`**.
+
+## **12.** Init and Set useRef on Image
+
+- Initialize **React.useRef** to **`<img url={imageURL}`** to trigger model inference.
+
+```javascript
+// after inputRef
+const imageRef = useRef();
+
+// App() return (
+<img alt="upload-preview" src={imageURL} ref={useRef} />
+// )
+```
+
+## **12.** Add Functionality
 
 ---
 
