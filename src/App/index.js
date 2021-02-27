@@ -44,7 +44,7 @@ export default function App({project_name = "Tensorflow.js React Dog Cat Classif
   const buttonProps = {
     initial: { text: 'Load Model', action: loadModel },
     loadingModel: { text: 'Loading Model...', action: () => {}},
-    awaitingModel: { text: 'Upload Photo', action: () => {}},
+    awaitingModel: { text: 'Upload Photo', action: () => input.current.click()},
     ready: { text: 'Identify', action: () => {}},
     classifying: { text: 'Identifying', action: () => {}},
     complete: { text: 'Reset', action: () => {}}

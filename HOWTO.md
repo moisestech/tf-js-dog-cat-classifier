@@ -264,7 +264,7 @@ const stateMachine = {
   ```javascript
   // after handleUpload initiation
   const buttonProps = {
-    awaitingUpload: { text: "Upload Photo", action: () => input.current.click()}
+    awaitingUpload: { text: "Upload Photo", action: () => inputRef.current.click()}
   }
   ```
 
