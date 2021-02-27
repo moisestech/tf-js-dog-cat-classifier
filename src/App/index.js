@@ -23,10 +23,19 @@ export default function App({project_name = "Tensorflow.js React Dog Cat Classif
   const [appState, dispatch] = useReducer(reducer, stateMachine.initial);
   const next = () => dispatch('next');
   
+  const buttonProps = {
+    initial: { text: 'Load Model', action: () => {}},
+    loadingModel: { text: 'Loading Model...', action: () => {}},
+    awaitingModel: { text: '', action: () => {}},
+    ready: { text: 'Identify', action: () => {}},
+    classifying: { text: 'Identifying', action: () => {}},
+    complete: { text: 'Reset', action: () => {}}
+  };
+
   return (
     <header>
-      <button onClick={next}>
-        {appState}
+      <button onClick={buttonProps[appState].action}>
+        {buttonProps[appState].text}
       </button>
     </header>  
   )
