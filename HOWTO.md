@@ -164,6 +164,16 @@ const loadModel = async () => {
 const [model, setModel] = useState(null);
 ```
 
+- **`buttonProps[initial].action`** is updated to store the async **`loadModel`** returned value.
+
+```javascript
+// after loadModel async function
+  const buttonProps = {
+    initial: { text: 'Load Model', action: loadModel },
+    //...
+  }
+```
+
 ## **7.** Add Functionality
 
 ---
