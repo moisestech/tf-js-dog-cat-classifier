@@ -22,6 +22,7 @@ const reducer = (currentState, event) => stateMachine.states[currentState].on[ev
 export default function App({project_name = "Tensorflow.js React Dog Cat Classifier"}) {
   const [appState, dispatch] = useReducer(reducer, stateMachine.initial);
   const [model, setModel] = useState(null);
+  const [imageURL, setImageURL] = useState(null);
   const next = () => dispatch('next');
 
   const loadModel = async () => {
@@ -30,11 +31,20 @@ export default function App({project_name = "Tensorflow.js React Dog Cat Classif
     setModel(mobilenetModel);
     next(); // modelReady
   }
+
+  const handleUpload = e => {
+    const { files } = e.target;
+    if (files.length > 0) {
+      const url = URL.createObject(files[0]);
+      setImageURL(url);
+      next(); // imageReady
+    }
+  };
   
   const buttonProps = {
     initial: { text: 'Load Model', action: loadModel },
     loadingModel: { text: 'Loading Model...', action: () => {}},
-    awaitingModel: { text: '', action: () => {}},
+    awaitingModel: { text: 'Upload Photo', action: () => {}},
     ready: { text: 'Identify', action: () => {}},
     classifying: { text: 'Identifying', action: () => {}},
     complete: { text: 'Reset', action: () => {}}
@@ -42,6 +52,7 @@ export default function App({project_name = "Tensorflow.js React Dog Cat Classif
 
   return (
     <header>
+      <input type="file" accept="image/*" capture="camera/*"/>
       <button onClick={buttonProps[appState].action}>
         {buttonProps[appState].text}
       </button>
