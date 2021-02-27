@@ -32,7 +32,7 @@ export default function App({project_name = "Tensorflow.js React Dog Cat Classif
   }
   
   const buttonProps = {
-    initial: { text: 'Load Model', action: () => {}},
+    initial: { text: 'Load Model', action: loadModel },
     loadingModel: { text: 'Loading Model...', action: () => {}},
     awaitingModel: { text: '', action: () => {}},
     ready: { text: 'Identify', action: () => {}},
