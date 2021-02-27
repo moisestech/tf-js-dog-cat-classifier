@@ -8,7 +8,7 @@ const stateMachine = {
     initial: "initial",
     states: {
       initial: { on: { next: "loadingModel", text: "Load Model" } },
-      loadingModel: { on: { next: "modelReady", text: "Loading Model" } },
+      loadingModel: { on: { next: "modelReady", text: "Loading Model..." } },
       modelReady: { on: { next: "imageReady", text: "Upload Image"} },
       imageReady: { on: { next: "identifying" }, text: "Identify Breed", showImage: true },
       identifying: { on: { next: "complete", text: "Identifying…"} },
@@ -25,8 +25,10 @@ export default function App({project_name = "Tensorflow.js React Dog Cat Classif
   const next = () => dispatch('next');
 
   const loadModel = async () => {
+    next(); // loadingModel
     const mobilenetModel = await mobilenet.load();
     setModel(mobilenetModel);
+    next(); // modelReady
   }
   
   const buttonProps = {
