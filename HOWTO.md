@@ -110,12 +110,12 @@ const next = () => dispatch('next');
 ```javascript
 // after next arrow function declaration
 const buttonProps = {
-  initial: {},
-  loadingModel: {},
-  awaitingModel: {},
-  ready: {},
-  classifying: {},
-  complete: {}
+  initial: { text: 'Load Model', action: () => {}},
+  loadingModel: { text: 'Loading Model...', action: () => {}},
+  awaitingModel: { text: '', action: () => {}},
+  ready: { text: 'Identify', action: () => {}},
+  classifying: { text: 'Identifying', action: () => {}},
+  complete: { text: 'Reset', action: () => {}}
 };
 
 return (
@@ -123,6 +123,17 @@ return (
     <button onClick=()>{appState}</button>
   </div>
 )
+```
+
+## **8.** Connect Button to useReducer and State
+
+- **`buttonProps[appState]`** determines the functionality and text displayed.
+
+```javascript
+// App() return
+<button onClick={buttonProps[appState].action}>
+  {buttonProps[appState].text}
+</button>
 ```
 
 ## **7.** Add Functionality
