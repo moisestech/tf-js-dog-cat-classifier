@@ -234,17 +234,27 @@ const imageRef = useRef();
 
 ## **13.** Sync stateMachine to Image component
 
-- Pull and store **`stateMachine.states.[appState]`** boolean **`showImage`** and set it's default state as **`false`**.
-- In App component **`return()`**  create a **ternary** that shows or hides the image if its uploaded or not.
+  i. Pull and store **`stateMachine.states.[appState]`** boolean **`showImage`** and set it's default state as **`false`**.
 
-```javascript
-// after buttonProps
-const { showImage = false } = stateMachine.states[appState];
+  ii. In App component **`return()`**  create a **ternary** that shows or hides the image if its uploaded or not.
 
-// in App() return (
-{showImage && <img alt="upload-preview" src={imageURL} ref={useRef}/>}
-// )
-```
+  ```javascript
+  // after buttonProps
+  const { showImage = false } = stateMachine.states[appState];
+
+  // in App() return (
+  {showImage && <img alt="upload-preview" src={imageURL} ref={useRef}/>}
+  // )
+  ```
+
+  iii. **buttonProps["awaitingUpload"].actions** object stores the **`inputRef.current.click()`**
+
+  ```javascript
+  // after handleUpload initiation
+  const buttonProps = {
+    awaitingUpload: { text: "Upload Photo", action: () => input.current.click()}
+  }
+  ```
 
 ## **12.** Add Functionality
 
