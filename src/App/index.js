@@ -52,7 +52,7 @@ export default function App({project_name = "Tensorflow.js React Dog Cat Classif
 
   return (
     <header>
-      <input type="file" accept="image/*" capture="camera/*"/>
+      <input type="file" accept="image/*" capture="camera/*" onChange={handleUpload} />
       <button onClick={buttonProps[appState].action}>
         {buttonProps[appState].text}
       </button>
