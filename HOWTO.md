@@ -174,7 +174,46 @@ const [model, setModel] = useState(null);
   }
 ```
 
-## **7.** Add Functionality
+## **10.** Trigger the Upload of the Image
+
+- **React.useRef** is initialized and used to access the new **`<input />`** component.
+
+```javascript
+const inputRef = useRef();
+```
+
+- The **`<input/>`** file-upload component will be triggered via javascript and access the users camera on mobile.
+
+```javascript
+// App() return (
+  <input type="file" accept="image/*" capture="camera/*"/>
+// )
+```
+
+- **React.useState** is initialized as set-up for the **imageURL** stored from **`<input />`**
+
+```javascript
+// after setModel useState
+const [imageURL, setImageURL] = useState(null);
+```
+
+- **`handleUpload`** function will check if there is image data in **`files`** variable.
+- Image data **`files[0]`** will be stored in a **useState** Hook as an **imageURL** using **`setImageURL(url)`** from **`URL.createObjectURL(files[0]);`** and used as the **`<img src="{`imageURL`}"/>`**
+- At the end of the function **`next();`** is triggered to indicate imageReady to be detected.
+
+```javascript
+// after hook initializatoins
+const handleUpload = e => {
+  const { files } = e.target;
+  if (files.length > 0) {
+    const url = URL.createObject(files[0]);
+    setImageURL(url);
+    next(); // imageReady
+  }
+};
+```
+
+## **11.** Add Functionality
 
 ---
 
