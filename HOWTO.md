@@ -150,8 +150,10 @@ return (
 ```javascript
 // above buttonProps
 const loadModel = async () => {
+  next(); // loadingModel
   const mobilenetModel = await mobilenet.load();
   setModel(mobilenetModel);
+  next(); // modelReady
 }
 ```
 
