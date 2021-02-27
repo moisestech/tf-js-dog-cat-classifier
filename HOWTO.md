@@ -186,7 +186,7 @@ const inputRef = useRef();
 
 ```javascript
 // App() return (
-  <input type="file" accept="image/*" capture="camera/*"/>
+  <input type="file" accept="image/*" capture="camera/*" onChange={handleUpload} />
 // )
 ```
 
@@ -197,7 +197,7 @@ const inputRef = useRef();
 const [imageURL, setImageURL] = useState(null);
 ```
 
-- **`handleUpload`** function will check if there is image data in **`files`** variable.
+- **`handleUpload`** function will check if there is image data in **`{ files } = e.target;`** variable.
 - Image data **`files[0]`** will be stored in a **useState** Hook as an **imageURL** using **`setImageURL(url)`** from **`URL.createObjectURL(files[0]);`** and used as the **`<img src="{`imageURL`}"/>`**
 - At the end of the function **`next();`** is triggered to indicate imageReady to be detected.
 
