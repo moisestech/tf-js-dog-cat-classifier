@@ -2,6 +2,11 @@
 
 ## **1.** Install dependencies
 
+```javascript
+// head of file
+import * mobilenet from '@tensorflow-models/mobilenet';
+```
+
 ## **2.** Layout the state machine
 
 - App/index.js
@@ -134,6 +139,26 @@ return (
 <button onClick={buttonProps[appState].action}>
   {buttonProps[appState].text}
 </button>
+```
+
+## **9.** Load and Store Model
+
+- **`loadModel`** async function will load the model as per the [MobileNet Tensorflow.js docs](https://www.npmjs.com/package/@tensorflow-models/mobilenet).
+- **`loadModel`** stores the loaded model in **`mobilenetModel`** and sets it to component useState Hook.
+
+```javascript
+// above buttonProps
+const loadModel = async () => {
+  const mobilenetModel = await mobilenet.load();
+  setModel(mobilenetModel);
+}
+```
+
+- **React.useState** will contain the model to access and set state on.
+
+```javascript
+// below userReducer initialization
+const [model, setModel] = useState(null);
 ```
 
 ## **7.** Add Functionality
