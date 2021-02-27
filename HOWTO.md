@@ -176,42 +176,44 @@ const [model, setModel] = useState(null);
 
 ## **10.** Trigger the Upload of the Image
 
-- **React.useRef** is initialized and used to access the new **`<input />`** component.
+  i. **React.useRef** is initialized and used to access the new **`<input />`** component.
 
 ```javascript
 const inputRef = useRef();
 ```
 
-- The **`<input/>`** file-upload component will be triggered via javascript and access the users camera on mobile.
+  ii. The **`<input/>`** file-upload component will be triggered via javascript and access the users camera on mobile.
 
-```javascript
-// App() return (
-  <input type="file" accept="image/*" capture="camera/*" onChange={handleUpload} />
-// )
-```
+  ```javascript
+  // App() return (
+    <input type="file" accept="image/*" capture="camera/*" onChange={handleUpload} />
+  // )
+  ```
 
-- **React.useState** is initialized as set-up for the **imageURL** stored from **`<input />`**
+  iii. Initialize **React.useState** with **`imageURL`** stored from **`<input />`**
 
-```javascript
-// after setModel useState
-const [imageURL, setImageURL] = useState(null);
-```
+  ```javascript
+  // after setModel useState
+  const [imageURL, setImageURL] = useState(null);
+  ```
 
-- **`handleUpload`** function will check if there is image data in **`{ files } = e.target;`** variable.
-- Image data **`files[0]`** will be stored in a **useState** Hook as an **imageURL** using **`setImageURL(url)`** from **`URL.createObjectURL(files[0]);`** and used as the **`<img src="{`imageURL`}"/>`**
-- At the end of the function **`next();`** is triggered to indicate imageReady to be detected.
+  iv. function **`handleUpload`** checks if there is image data in **`{ files } = e.target;`** variable.
+  
+  v. Image data in **`files[0]`** is turned into **`URL.createObjectURL(files[0]);`** and stored in **useState** **`imageURL`** with **`setImageURL(url)`**.
+  
+  vi. Finally **`next();`** is steps up to indicate **imageReady** **`appState`** to infer from model.
 
-```javascript
-// after hook initializatoins
-const handleUpload = e => {
-  const { files } = e.target;
-  if (files.length > 0) {
-    const url = URL.createObject(files[0]);
-    setImageURL(url);
-    next(); // imageReady
-  }
-};
-```
+  ```javascript
+  // after hook initializatoins
+  const handleUpload = e => {
+    const { files } = e.target;
+    if (files.length > 0) {
+      const url = URL.createObject(files[0]);
+      setImageURL(url);
+      next(); // imageReady
+    }
+  };
+  ```
 
 ## **11.** Set Image URL
 
@@ -219,7 +221,7 @@ const handleUpload = e => {
 
 ## **12.** Init and Set useRef on Image
 
-- Initialize **React.useRef** to **`<img url={imageURL}`** to trigger model inference.
+- Initialize **React.useRef** to **`<img src={imageURL}`** to trigger model inference.
 
 ```javascript
 // after inputRef
@@ -227,6 +229,20 @@ const imageRef = useRef();
 
 // App() return (
 <img alt="upload-preview" src={imageURL} ref={useRef} />
+// )
+```
+
+## **13.** Sync stateMachine to Image component
+
+- Pull and store **`stateMachine.states.[appState]`** boolean **`showImage`** and set it's default state as **`false`**.
+- In App component **`return()`**  create a **ternary** that shows or hides the image if its uploaded or not.
+
+```javascript
+// after buttonProps
+const { showImage = false } = stateMachine.states[appState];
+
+// in App() return (
+{showImage && <img alt="upload-preview" src={imageURL} ref={useRef}/>}
 // )
 ```
 
