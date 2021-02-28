@@ -298,6 +298,7 @@ const stateMachine = {
   i. **useState** **`[results, setResults]`** will hold the models classification.
 
   ```javascript
+  // after imageURL useState init
   const [results, setResults] = useState([]);
   ```
 
@@ -318,7 +319,22 @@ const stateMachine = {
 
 ## **16.** Connect formatResults to dom element
 
-  i. Add dom element that **`maps`** over result arrays.
+  i. Pull **`showResults`** from **`stateMachine`** to execture **ternary** in **return** function.
+
+  ```javascript
+  // after buttonProps
+  const { showImage = false, showResults = false} = stateMachine.states[appState];
+  ```
+
+  ii. Add dom element that **`maps`** over result arrays.
+
+  ```javascript
+  // return (
+    {showResults && <ul> 
+      {results.map(formatResult)}
+    </ul>}
+  // )
+  ```
 
 ---
 
