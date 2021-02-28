@@ -268,7 +268,57 @@ const stateMachine = {
   }
   ```
 
-## **12.** Add Functionality
+## **13.** Create and connect identify mobilenet function
+
+  i. The new async function **`identify`** will compute **`model.classify(imageRef.current)`** and store in variable **`results`**.
+
+  ii. Async function **`identify`** also transition our **`stateMachine`**.
+
+  ```javascript
+  // after handleUpload
+  const identify = async () => {
+    next(); // identifying
+    const results = await model.classify(imageRef.current);
+    next(); // complete
+  }
+  ```
+
+  iii. Connect **`identify`** function by invoking it in **`buttonProps.ready.action`**.
+
+  ```javascript
+  const buttonProps = {
+    // prev states...
+    ready: { text: "Identify", action: identify }
+    // next states...
+  }
+  ```
+
+## **14.** Display Mobilenet Model Results
+
+  i. **useState** **`[results, setResults]`** will hold the models classification.
+
+  ```javascript
+  const [results, setResults] = useState([]);
+  ```
+
+## **15.** Format Results function
+
+  i. **`formatResults`** will pull **`{classname, probability}`** and **return list items** as a string with the classname and probability.
+
+  ii. Insite the function the **`probability`** will be multiplied by 100 and fix the result at two decimal places.
+
+  ```javascript
+  // above App() initiation, can be imported in utils?
+  const formatResults = ({classname, probability}) => (
+    <li key={className}>
+      {`${className}: %${(probability * 100).toFixed(2)}`}
+    </li>
+  )
+  ```
+
+## **16.** Connect formatResults to dom element
+
+  i. Add dom element that **`maps`** over result arrays.
 
 ---
 
