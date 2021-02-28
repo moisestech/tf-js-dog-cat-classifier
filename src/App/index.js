@@ -51,7 +51,8 @@ export default function App({project_name = "Tensorflow.js React Dog Cat Classif
 
   const identify = async () => {
     next(); // identifying
-    const results = await model.classify(imageRef.current);
+    const classificationResults = await model.classify(imageRef.current);
+    setResults(classificationResults)
     next(); // complete
   }
   
@@ -64,14 +65,16 @@ export default function App({project_name = "Tensorflow.js React Dog Cat Classif
     complete: { text: 'Reset', action: () => {}}
   };
 
+  const { showImage = false, showResults = false} = stateMachine.states[appState];
+
   return (
     <header>
-      <img alt="upload-preview" url={imageURL} />
+      { showImage && <img alt="upload-preview" src={imageURL} ref={imageRef} />}
       <input type="file" accept="image/*" capture="camera/*" onChange={handleUpload} />
       
-      <ul className="model-results">
+      { showResults && <ul className="model-results">
         {results.map(formatResults)}
-      </ul>
+      </ul>}
       
       <button onClick={buttonProps[appState].action}>
         {buttonProps[appState].text}
