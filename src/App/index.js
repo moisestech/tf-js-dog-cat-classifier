@@ -19,6 +19,13 @@ const stateMachine = {
 // function triggering the stateMachine from useReducer
 const reducer = (currentState, event) => stateMachine.states[currentState].on[event] || stateMachine.initial;
 
+// makes model inference viewable in dom
+const formatResults = ({className, probability}) => (
+  <li key={className}>
+    {`${className}: %${(probability * 100).toFixed(2)}`}
+  </li>
+);
+
 export default function App({project_name = "Tensorflow.js React Dog Cat Classifier"}) {
   const [appState, dispatch] = useReducer(reducer, stateMachine.initial);
   const [model, setModel] = useState(null);
@@ -40,12 +47,18 @@ export default function App({project_name = "Tensorflow.js React Dog Cat Classif
       next(); // imageReady
     }
   };
+
+  const identify = async () => {
+    next(); // identifying
+    const results = await model.classify(imageRef.current);
+    next(); // complete
+  }
   
   const buttonProps = {
     initial: { text: 'Load Model', action: loadModel },
     loadingModel: { text: 'Loading Model...', action: () => {}},
     awaitingModel: { text: 'Upload Photo', action: () => inputRef.current.click()},
-    ready: { text: 'Identify', action: () => {}},
+    ready: { text: 'Identify', action: identify },
     classifying: { text: 'Identifying', action: () => {}},
     complete: { text: 'Reset', action: () => {}}
   };
@@ -54,6 +67,11 @@ export default function App({project_name = "Tensorflow.js React Dog Cat Classif
     <header>
       <img alt="upload-preview" url={imageURL} />
       <input type="file" accept="image/*" capture="camera/*" onChange={handleUpload} />
+      
+      <ul className="model-results">
+        {results.map(formatResults)}
+      </ul>
+      
       <button onClick={buttonProps[appState].action}>
         {buttonProps[appState].text}
       </button>
