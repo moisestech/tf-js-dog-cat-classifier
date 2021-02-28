@@ -30,6 +30,7 @@ export default function App({project_name = "Tensorflow.js React Dog Cat Classif
   const [appState, dispatch] = useReducer(reducer, stateMachine.initial);
   const [model, setModel] = useState(null);
   const [imageURL, setImageURL] = useState(null);
+  const [results, setResults] = useState([]);
   const next = () => dispatch('next');
 
   const loadModel = async () => {
