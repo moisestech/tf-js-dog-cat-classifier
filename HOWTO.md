@@ -317,7 +317,7 @@ const stateMachine = {
   )
   ```
 
-## **16.** Connect formatResults to dom element
+## **16.** Connect formatResults to DOM element
 
   i. Pull **`showResults`** from **`stateMachine`** to execture **ternary** in **return** function.
 
@@ -335,6 +335,28 @@ const stateMachine = {
     </ul>}
   // )
   ```
+
+## **17.** Reset App to start again
+
+i. Reset all **useStates** to original states.
+
+```javascript
+// after handleResults
+const reset = () => {
+   setResults([]);
+   setImageURL(null);
+   next();
+}
+```
+
+ii. Connect Reset App to **stateMachine**.
+
+```javascript
+const buttonProps = {
+// prev button states
+complete: { text: 'Reset', action: reset }
+}
+```
 
 ---
 
